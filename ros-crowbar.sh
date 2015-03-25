@@ -26,8 +26,8 @@ rancher:
 EOF
 
 cd /boot
-curl -O vmlinux-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/vmlinuz
-curl -O initrd-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/initrd
+curl -L -O vmlinux-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/vmlinuz
+curl -L -O initrd-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/initrd
 
 cat<<EOF
 menuentry 'RancherOS-v0.2.1' {
