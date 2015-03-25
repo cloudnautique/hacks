@@ -40,7 +40,7 @@ menuentry 'RancherOS-v0.2.1' {
         set root='(/dev/mapper/vda,msdos1)'
         search --no-floppy --fs-uuid --set=root ea795a0f-394e-4ced-952b-0fd0e3ab762c
         echo    'Loading RancherOS ...'
-        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.password=rancher rancher.debug=true ro console=ttyS0,38400n8 console=ttyS0
+        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.debug=true console=ttyS0,38400n8 console=ttyS0
         echo    'Loading initial ramdisk ...'
         initrd  /boot/initrd-rancheros-0.2.1
 }
