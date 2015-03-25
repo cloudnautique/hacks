@@ -25,6 +25,8 @@ rancher:
         mtu: 1460
       lo:
         address: 127.0.0.1/8
+  enabled_addons:
+    - ubuntu-console
 EOF
 
 cd /boot
