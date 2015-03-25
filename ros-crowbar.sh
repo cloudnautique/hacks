@@ -5,6 +5,8 @@ apt-get install -y curl git
 
 mkdir -p /lib/rancher/conf
 
+e2label /dev/sda1 RANCHER_STATE
+
 cat > /lib/rancher/conf/rancher.yml<<EOF
 cloud_init:
   datasources:
@@ -13,6 +15,8 @@ EOF
 
 cat > /lib/rancher/conf/user_config.yml<<EOF
 #cloud-config
+ssh_authorized_keys:
+  - $(<key.pub)
 rancher:
   network:
     interfaces:
