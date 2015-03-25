@@ -11,10 +11,8 @@ cloud_init:
       - file:/var/lib/rancher/conf/user_config.yml
 EOF
 
-cat > /lib/rancher/conf/rancher.yml<<EOF
+cat > /lib/rancher/conf/user_config.yml<<EOF
 #cloud-config
-ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
 rancher:
   network:
     interfaces:
@@ -26,7 +24,7 @@ rancher:
 EOF
 
 cd /boot
-curl -L -o vmlinux-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/vmlinuz
+curl -L -o vmlinuz-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/vmlinuz
 curl -L -o initrd-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/initrd
 
 cat<<EOF
