@@ -8,6 +8,7 @@ git clone https://github.com/cloudnautique/os.git
 cd os
 git checkout gce_image
 ./build.sh
+cd ..
 
 mkdir -p /lib/rancher/conf
 
@@ -39,9 +40,9 @@ rancher:
     - ubuntu-console
 EOF
 
-cd /boot
-curl -L -o vmlinuz-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/vmlinuz
-curl -L -o initrd-rancheros-0.2.1 https://github.com/rancherio/os/releases/download/v0.2.1/initrd
+cp os/dist/artifacts/vmlinuz /boot/vmlinuz-rancheros-0.2.1
+cp os/dist/artifacts/initrd /boot/initrd-rancheros-0.2.1
+
 
 cat<<EOF
 menuentry 'RancherOS-v0.2.1' {
