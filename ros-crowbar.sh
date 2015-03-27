@@ -2,6 +2,12 @@
 
 apt-get update
 apt-get install -y curl git
+curl -sSL https://get.docker.com|sh
+
+git clone https://github.com/cloudnautique/os.git
+cd os
+git checkout gce_image
+./build.sh
 
 mkdir -p /lib/rancher/conf
 
@@ -19,6 +25,10 @@ ssh_authorized_keys:
   - $(<key.pub)
 rancher:
   network:
+    post_run_system:
+      - id: network_post_run
+        run: --rm --cap-add=NET_ADMIN --net=host --volumes-from=command-volumes --volumes-from=system-volumes network /scripts/gce-config.sh
+        createonly: false
     interfaces:
       eth*:
         dhcp: true
