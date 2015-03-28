@@ -2,11 +2,18 @@
 
 apt-get update
 apt-get install -y curl git
-curl -sSL https://get.docker.com|sh
+if [ ! $(command -v docker) ]; then
+    curl -sSL https://get.docker.com|sh
+fi
 
-git clone https://github.com/cloudnautique/os.git
-cd os
-git checkout gce_image
+if [ ! -d ./os ]; then
+    git clone https://github.com/cloudnautique/os.git
+    cd os
+    git checkout gce_image
+else
+    cd os
+fi
+
 ./build.sh
 cd ..
 
@@ -51,9 +58,9 @@ menuentry 'RancherOS-v0.2.1' {
         insmod part_msdos
         insmod ext2
         set root='(/dev/mapper/vda,msdos1)'
-        search --no-floppy --fs-uuid --set=root ea795a0f-394e-4ced-952b-0fd0e3ab762c
+        search --no-floppy --fs-uuid --set=root 
         echo    'Loading RancherOS ...'
-        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.debug=true console=ttyS0,38400n8 console=ttyS0
+        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.debug=true console=ttyS0
         echo    'Loading initial ramdisk ...'
         initrd  /boot/initrd-rancheros-0.2.1
 }
