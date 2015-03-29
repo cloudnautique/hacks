@@ -35,10 +35,6 @@ ssh_authorized_keys:
 rancher:
   oem: gce
   network:
-    post_run_system:
-      - id: network_post_run
-        run: --rm --cap-add=NET_ADMIN --net=host --volumes-from=command-volumes --volumes-from=system-volumes network /scripts/gce-config.sh
-        createonly: false
     interfaces:
       eth*:
         dhcp: true
