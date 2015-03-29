@@ -33,6 +33,7 @@ cat > /lib/rancher/conf/user_config.yml<<EOF
 ssh_authorized_keys:
   - $(<key.pub)
 rancher:
+  oem: gce
   network:
     post_run_system:
       - id: network_post_run
