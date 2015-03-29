@@ -9,7 +9,8 @@ fi
 if [ ! -d ./os ]; then
     git clone https://github.com/cloudnautique/os.git
     cd os
-    git checkout gce_image --no-ff --no-commit
+    git checkout gce_image 
+    git merge --no-commit --no-ff origin/more_logging_with_a_side_of_debug
 else
     cd os
 fi
