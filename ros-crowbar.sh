@@ -22,22 +22,6 @@ mkdir -p /lib/rancher/conf
 
 e2label /dev/sda1 RANCHER_STATE
 
-cat > /lib/rancher/conf/rancher.yml<<EOF
-cloud_init:
-  datasources:
-      - file:/var/lib/rancher/conf/user_config.yml
-EOF
-
-cat > /lib/rancher/conf/user_config.yml<<EOF
-#cloud-config
-ssh_authorized_keys:
-  - $(<key.pub)
-rancher:
-  oem: gce
-  enabled_addons:
-    - ubuntu-console
-EOF
-
 cp os/dist/artifacts/vmlinuz /boot/vmlinuz-rancheros-0.2.1
 cp os/dist/artifacts/initrd /boot/initrd-rancheros-0.2.1
 
@@ -49,9 +33,9 @@ menuentry 'RancherOS-v0.2.1' {
         insmod part_msdos
         insmod ext2
         set root='(/dev/mapper/vda,msdos1)'
-        search --no-floppy --fs-uuid --set=root 
+        search --no-floppy --fs-uuid --set=root --label RANCHER_STATE RANCHER_BOOT
         echo    'Loading RancherOS ...'
-        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.oem=gce rancher.debug=true console=ttyS0
+        linux   /boot/vmlinuz-rancheros-0.2.1 rancher.oem=gce rancher.cloud_init.datasources=[gce] rancher.debug=true console=ttyS0
         echo    'Loading initial ramdisk ...'
         initrd  /boot/initrd-rancheros-0.2.1
 }
